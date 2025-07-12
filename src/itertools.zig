@@ -87,3 +87,20 @@ test "ChainIterator" {
     try std.testing.expectEqual(7, chain.next().?);
     try std.testing.expect(chain.next() == null);
 }
+
+const EmptyIterator = struct {
+    fn next(self: @This()) ?void {
+        _ = self;
+        return null;
+    }
+};
+
+test "ChainIterator empty" {
+    var iterator1 = EmptyIterator{};
+    var iterator2 = EmptyIterator{};
+
+    var chain = ChainIterator(@TypeOf(iterator1), @TypeOf(iterator2), void)
+        .init(&iterator1, &iterator2);
+
+    try std.testing.expect(chain.next() == null);
+}

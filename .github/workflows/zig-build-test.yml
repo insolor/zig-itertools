@@ -43,7 +43,7 @@ jobs:
       - name: Run unit tests
         run: zig build test
 
-    #   - name: Run integration tests
-    #     run: |
-    #       cd tests
-    #       zig build test
+      - name: Run integration tests
+        run: |
+          cd tests
+          zig build test

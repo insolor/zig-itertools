@@ -3,7 +3,7 @@
 > [!WARNING]  
 > WORK IN PROGRESS
 
-Implementation of some useful data structures in Zig. Inspired by Python's `itertools` module.
+Implementation of some useful data structures in Zig. Inspired by Python's [`itertools`](https://docs.python.org/3/library/itertools.html) module.
 
 Implemented so far:
 

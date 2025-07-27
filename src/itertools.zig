@@ -19,7 +19,7 @@ fn SliceIterator(comptime T: type) type {
     };
 }
 
-test "Iter" {
+test "SliceIterator" {
     const array = [_]i32{ 1, 2, 3 };
     var iterator = SliceIterator(i32).init(&array);
 

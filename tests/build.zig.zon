@@ -4,7 +4,7 @@
     .fingerprint = 0x1260fc5ef4bdcd0f, // Changing this has security and trust implications.
     .minimum_zig_version = "0.14.0",
     .dependencies = .{
-        .zig_collections = .{
+        .zig_itertools = .{
             .path = "..",
         },
     },

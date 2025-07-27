@@ -1,9 +1,4 @@
 const std = @import("std");
-const testing = std.testing;
-const expectEqual = testing.expectEqual;
-const expectEqualDeep = testing.expectEqualDeep;
-const ArrayList = std.ArrayList;
-const allocator = std.testing.allocator;
 
 const itertools = @import("zig_itertools");
 const SliceIterator = itertools.SliceIterator;

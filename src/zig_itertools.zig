@@ -1,5 +1,3 @@
-const std = @import("std");
-
 pub fn SliceIterator(comptime T: type) type {
     return struct {
         slice: []const T,

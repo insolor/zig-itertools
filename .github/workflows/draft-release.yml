@@ -18,10 +18,14 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v8.2.0
+
       - name: Fetch version from build.zig.zon
         id: fetch_version
         run: |
-          echo version=$(python ci/get_version.py) >> $GITHUB_OUTPUT
+          uv run ci/get_version.py
+          echo version=$(uv run ci/get_version.py) >> $GITHUB_OUTPUT
 
       - name: Release
         uses: softprops/action-gh-release@v2

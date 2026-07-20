@@ -15,13 +15,13 @@ Implemented so far:
 
 Supported zig versions:
 
-| Version | Support |
-| :-----: | :-----: |
-| 0.14.0  | ✅      |
-| 0.14.1  | ✅      |
-| 0.15.1  | ✅      |
-| 0.15.2  | ✅      |
-| 0.16.0  | ✅      |
+| Version | Support   |
+| :-----: | :-------: |
+| 0.14.0  | In v0.0.1 |
+| 0.14.1  | In v0.0.1 |
+| 0.15.1  | ✅        |
+| 0.15.2  | ✅        |
+| 0.16.0  | ✅        |
 
 ## Installation
 

@@ -9,10 +9,10 @@ test "SliceIterator" {
     const array = [_]i32{ 1, 2, 3 };
     var iterator = SliceIterator(i32).init(&array);
 
-    try std.testing.expectEqual(1, iterator.next().?);
-    try std.testing.expectEqual(2, iterator.next().?);
-    try std.testing.expectEqual(3, iterator.next().?);
-    try std.testing.expect(iterator.next() == null);
+    var result = try itertools.collectTo(std.ArrayList(i32), std.testing.allocator, &iterator);
+    defer result.deinit(std.testing.allocator);
+
+    try std.testing.expectEqualDeep(&array, result.items);
 }
 
 test "ChainIterator" {
@@ -25,13 +25,10 @@ test "ChainIterator" {
     var chain = ChainIterator(@TypeOf(iterator1), @TypeOf(iterator2), i32)
         .init(&iterator1, &iterator2);
 
-    try std.testing.expectEqual(1, chain.next().?);
-    try std.testing.expectEqual(2, chain.next().?);
-    try std.testing.expectEqual(3, chain.next().?);
-    try std.testing.expectEqual(9, chain.next().?);
-    try std.testing.expectEqual(8, chain.next().?);
-    try std.testing.expectEqual(7, chain.next().?);
-    try std.testing.expect(chain.next() == null);
+    var result = try itertools.collectTo(std.ArrayList(i32), std.testing.allocator, &chain);
+    defer result.deinit(std.testing.allocator);
+
+    try std.testing.expectEqualDeep(&[_]i32{ 1, 2, 3, 9, 8, 7 }, result.items);
 }
 
 test "ChainIterator empty" {

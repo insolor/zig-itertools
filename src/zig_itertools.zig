@@ -1,3 +1,6 @@
+const std = @import("std");
+
+/// Iterator, which iterates over a slice.
 pub fn SliceIterator(comptime T: type) type {
     return struct {
         slice: []const T,
@@ -17,6 +20,7 @@ pub fn SliceIterator(comptime T: type) type {
     };
 }
 
+/// Iterator, which "glues" two iterator in one, returns their elements in succession.
 pub fn ChainIterator(comptime I1: type, comptime I2: type, comptime R: type) type {
     const State = enum(u8) { it1, it2, end };
 
@@ -57,9 +61,25 @@ pub fn ChainIterator(comptime I1: type, comptime I2: type, comptime R: type) typ
     };
 }
 
+/// An iterator, which emits no elements. Implemented only for testing purposes.
 pub const EmptyIterator = struct {
     fn next(self: @This()) ?void {
         _ = self;
         return null;
     }
 };
+
+/// Collect items from iterator into a container (which has `.append` method to add items).
+///
+/// - `T`: collection type, e.g. `std.ArrayList(i32)`
+/// - `allocator`: allocator
+/// - `iterator`: iterator to collect
+pub fn collectTo(comptime T: type, allocator: std.mem.Allocator, iterator: anytype) !T {
+    var array: T = .empty;
+
+    while (iterator.next()) |item| {
+        try array.append(allocator, item);
+    }
+
+    return array;
+}

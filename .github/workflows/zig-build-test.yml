@@ -32,13 +32,16 @@ jobs:
           - "0.16.0"
           - "0.17.0"
           - master
-    
+
     name: Build and Test
     steps:
       - uses: actions/checkout@v7
       - uses: mlugg/setup-zig@v2
         with:
           version: ${{ matrix.zig-version }}
+
+      - name: Check zig version
+        run: zig version
 
       - name: Run linter
         run: |
